@@ -28,6 +28,15 @@
       <CustomButton class="button" @click="toggleEditing">
         {{ todoItem.isEditing ? "Отменить" : "Редактировать" }}
       </CustomButton>
+
+      <CustomButton
+        class="button delete"
+        @click="deleteItem"
+        v-if="!todoItem.isEditing"
+      >
+        Удалить
+      </CustomButton>
+
       <CustomButton
         class="button"
         v-if="todoItem.isEditing"
@@ -81,6 +90,9 @@ export default defineComponent({
     saveChanges() {
       this.$store.commit(MutationTypes.SAVE_CHANGES, this.todoItem.id);
     },
+    deleteItem() {
+      this.$store.commit(MutationTypes.REMOVE_TODO, this.todoItem.id);
+    },
   },
   //emits: ["toggleCompleted"],
 });
@@ -113,6 +125,10 @@ export default defineComponent({
 
   .button:not(:last-child) {
     margin-right: 20px;
+  }
+
+  .button.delete {
+    background-color: crimson;
   }
 }
 </style>

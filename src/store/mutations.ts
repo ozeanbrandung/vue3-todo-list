@@ -26,7 +26,7 @@ export const mutations: MutationTree<State> & Mutations = {
     state.todos.push(payload);
   },
   [MutationTypes.REMOVE_TODO](state, payload: string) {
-    state.todos.filter((todoItem) => todoItem.id !== payload);
+    state.todos = state.todos.filter((todoItem) => todoItem.id !== payload);
   },
   // [MutationTypes.EDIT_TODO](state, payload: ITodo) {
   //   state.todos.map((todoItem) => {
