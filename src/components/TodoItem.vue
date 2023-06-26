@@ -2,6 +2,7 @@
   <div class="todo-item" :class="{ completed: todoItem.isCompleted }">
     <CustomInput
       class="input title"
+      :class="{ readonly: !todoItem.isEditing }"
       :value="todoItem.isEditing ? todoItem.titleInputValue : todoItem.title"
       @change="handleTitleValueChange"
       :readonly="!todoItem.isEditing"
@@ -9,6 +10,7 @@
 
     <CustomTextarea
       class="input text"
+      :class="{ readonly: !todoItem.isEditing }"
       :value="todoItem.isEditing ? todoItem.textInputValue : todoItem.text"
       @change="handleTextValueChange"
       :readonly="!todoItem.isEditing"
@@ -111,6 +113,10 @@ export default defineComponent({
 
   .input {
     margin-bottom: 20px;
+
+    &.readonly {
+      pointer-events: none;
+    }
   }
 
   .text {
