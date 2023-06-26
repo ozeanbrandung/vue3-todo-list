@@ -1,8 +1,5 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <Navigation />
   <router-view />
 </template>
 
@@ -15,16 +12,23 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+* {
+  box-sizing: border-box;
 }
 </style>
+<script>
+import Navigation from "@/components/ui/Navigation";
+import { defineComponent } from "vue";
+import { ActionTypes, MutationTypes } from "@/types/types";
+
+export default defineComponent({
+  name: "App",
+  components: { Navigation },
+  beforeMount() {
+    this.$store.commit(MutationTypes.INITIALIZE_LOCAL_STORAGE);
+  },
+});
+// export default {
+//   components: { Navigation },
+// };
+</script>
